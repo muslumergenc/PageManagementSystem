@@ -1,0 +1,70 @@
+﻿@model Page
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Login/private/keywords.css" rel="stylesheet" />
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                @if (ViewData.ModelState.ErrorCount > 0)
+                {
+                    <div>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <p>@error.ErrorMessage</p>
+                        }
+                    </div>
+                }
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Slug"></label>
+                        <input asp-for="Slug" class="form-control" />
+                        <span asp-validation-for="Slug" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SeoMeta"></label>
+                        <textarea asp-for="SeoMeta" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="SeoMeta" class="text-danger"></span>
+                    </div>
+                    <!-- SEO alanları -->
+                    <div class="form-group">
+                        <label asp-for="SeoTitle"></label>
+                        <input asp-for="SeoTitle" class="form-control" />
+                        <span asp-validation-for="SeoTitle" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SeoDescription"></label>
+                        <textarea asp-for="SeoDescription" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="SeoDescription" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seoKeywordsInput">Anahtar Kelimeler</label>
+                        <div id="seoKeywordsContainer" class="tag-container">
+                            <input type="text" id="seoKeywordsInput" class="form-control" placeholder="Anahtar kelimeleri yazın ve virgül ile ayırın" />
+                        </div>
+                        <input type="hidden" asp-for="SeoKeywords" id="SeoKeywords" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts
+{
+    <script src="~/Login/private/keywords.js"></script>
+}

@@ -1,0 +1,52 @@
+﻿@model LoginViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="login-logo">
+    <a href="/"><b>Yönetim</b></a>
+</div>
+<div class="card">
+    <div class="card-body login-card-body">
+        <p class="login-box-msg">Yönetim sayfası için giriş yapınız</p>
+
+        <form asp-action="Index" method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="input-group mb-3">
+                <input asp-for="Email" class="form-control" type="email" required="*" placeholder="Email Adresiniz" />
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="input-group mb-3">
+                <input asp-for="Password" class="form-control" type="password" required="*" placeholder="Şifreniz" />
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <div class="icheck-primary">
+                        <input type="checkbox" asp-for="RememberMe" />
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Giriş</button>
+                    <a href="/" class="btn btn-danger btn-block">Siteye Dön</a>
+                </div>
+            </div>
+            <p class="mb-1">
+                <a href="/login/forgotpassword">Şifremi Unuttum</a>
+            </p>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+﻿.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.tag-container input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 4px;
+    min-width: 120px;
+    background: transparent;
+}
+
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 16px;
+    font-size: 0.9rem;
+}
+
+.close-btn {
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}

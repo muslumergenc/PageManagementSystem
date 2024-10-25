@@ -1,0 +1,26 @@
+﻿@model Page
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="alert alert-danger">
+                    <h4>Bu sayfayı silmek istediğinize emin misiniz?</h4>
+                    <p><strong>@Model.Title</strong></p>
+                </div>
+
+                <form asp-action="DeleteConfirmed" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Sil</button>
+                    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+                </form>
+
+            </div>
+        </div>
+    </section>
+</div>
