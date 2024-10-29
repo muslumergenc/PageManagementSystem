@@ -12,9 +12,9 @@ namespace PageManagementSystem.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<Page>> GetAllAsync()
+        public async Task<Page[]> GetAllAsync()
         {
-            return await _context.Pages.ToListAsync();
+            return await _context.Pages.OrderBy(x=>x.Order).ToArrayAsync();
         }
 
         public async Task<Page> GetByIdAsync(int id)

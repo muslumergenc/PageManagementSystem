@@ -1,4 +1,4 @@
-﻿@model PageManagementSystem.Core.Entities.Page
+﻿@model Page
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -7,64 +7,64 @@
 
 <div class="content-wrapper">
     <section class="content">
-        <div class="row">
-            <div class="col-12">
-                <h2>Yeni Sayfa Ekle</h2>
-                @if (ViewData.ModelState.ErrorCount > 0)
-                {
-                    <div>
-                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                        {
-                            <p>@error.ErrorMessage</p>
-                        }
-                    </div>
-                }
-                <form asp-action="Create" method="post">
-                    <div class="form-group">
-                        <label asp-for="Title"></label>
-                        <input asp-for="Title" class="form-control" />
-                        <span asp-validation-for="Title" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Slug"></label>
-                        <input asp-for="Slug" class="form-control" placeholder="SEO uyumlu URL (örn: hakkimizda)" />
-                        <span asp-validation-for="Slug" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="SeoMeta"></label>
-                        <textarea asp-for="SeoMeta" class="form-control" rows="3"></textarea>
-                        <span asp-validation-for="SeoMeta" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="SeoTitle"></label>
-                        <input asp-for="SeoTitle" class="form-control" />
-                        <span asp-validation-for="SeoTitle" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="SeoDescription"></label>
-                        <textarea asp-for="SeoDescription" class="form-control" rows="2"></textarea>
-                        <span asp-validation-for="SeoDescription" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="seoKeywordsInput">Anahtar Kelimeler</label>
-                        <div id="seoKeywordsContainer" class="tag-container">
-                            <input type="text" id="seoKeywordsInput" class="form-control" placeholder="Anahtar kelimeleri yazın ve virgül ile ayırın" />
+            <div class="row">
+                <div class="col-12">
+                    <h2>Yeni Sayfa Ekle</h2>
+                    @if (ViewData.ModelState.ErrorCount > 0)
+                    {
+                        <div>
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <p>@error.ErrorMessage</p>
+                            }
                         </div>
-                        <input type="hidden" asp-for="SeoKeywords" id="SeoKeywords" />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Kaydet</button>
-                    <a asp-action="Index" class="btn btn-secondary">İptal</a>
-                </form>
+                    }
+                    <form asp-action="Create" method="post">
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title" class="form-control col-8" placeholder="Sayfa Başlığı" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Slug"></label>
+                            <input asp-for="Slug" class="form-control col-8" placeholder="SEO uyumlu URL (örn: hakkimizda)" />
+                            <span asp-validation-for="Slug" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SeoMeta"></label>
+                            <textarea asp-for="SeoMeta" class="form-control col-8" rows="3" placeholder="Seo Meta Değerleri"></textarea>
+                            <span asp-validation-for="SeoMeta" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SeoTitle"></label>
+                            <input asp-for="SeoTitle" class="form-control col-8" placeholder="SeoTitle Sayfa Başlığıyla Aynı Olabilir" />
+                            <span asp-validation-for="SeoTitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SeoDescription"></label>
+                            <textarea asp-for="SeoDescription" class="form-control col-8" rows="2" placeholder="Seo Description Alanı Max. 150 karakter olmalıdır." maxlength="150"></textarea>
+                            <span asp-validation-for="SeoDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="seoKeywordsInput">Anahtar Kelimeler</label>
+                            <div id="seoKeywordsContainer" class="tag-container col-8">
+                                <input type="text" id="seoKeywordsInput" class="form-control" placeholder="Anahtar kelimeleri yazın ve virgül ile ayırın" />
+                            </div>
+                            <input type="hidden" asp-for="SeoKeywords" id="SeoKeywords" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Order">Sıra</label>
+                            <input asp-for="Order" class="form-control col-1" placeholder="Sayfa Sırası" />
+                            <span asp-validation-for="Order" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                        <a asp-action="Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>    
 </div>
 @section Scripts
 {
     <script src="~/Login/private/keywords.js"></script>
 }
-

@@ -1,107 +1,11 @@
-﻿@model IEnumerable<Page>
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h2>Sayfa Yönetimi</h2>
 <div class="content-wrapper">
-    <section class="content">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <a asp-action="Create" class="float-right btn btn-sm bg-gradient-info btn-flat">Yeni Sayfa Ekle</a>
-                    </div>
-                    <div class="card-body">
-                        <div id="statusMessage" class="mt-3"></div>
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Başlık</th>
-                                    <th>Slug</th>
-                                    <th>Oluşturulma Tarihi</th>
-                                    <th>Son Güncelleme</th>
-                                    <th>İşlemler</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var p in Model)
-                                {
-                                    <tr id="page-@p.Id">
-                                        <td>@p.Title</td>
-                                        <td>@p.Slug</td>
-                                        <td>@p.CreatedAt.ToShortDateString()</td>
-                                        <td>@p.UpdatedAt.ToShortDateString()</td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-secondary">Düzenle</a>
-                                            <button class="btn btn-danger" onclick="confirmDelete(@p.Id)">Sil</button>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Başlık</th>
-                                    <th>Slug</th>
-                                    <th>Oluşturulma Tarihi</th>
-                                    <th>Son Güncelleme</th>
-                                    <th>İşlemler</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="content">
+    <div class="row">
+        <div class="col-12"></div>
+    </div>
+</section>
 </div>
-
-@section Scripts {
-    <script>
-        // Silme işlemi için onay penceresi
-        function confirmDelete(pageId) {
-            if (confirm("Bu sayfayı silmek istediğinize emin misiniz?")) {
-                deletePage(pageId);
-            }
-        }
-
-        // Silme işlemini AJAX ile gerçekleştir
-        function deletePage(pageId) {
-            fetch(`/Admin/Delete/${pageId}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': document.querySelector('input[name="__RequestVerificationToken"]').value
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    setTimeout(() => {
-                        console.log("Silme yanıtı:", data);
-                        if (data.success) {
-                            const pageRow = document.getElementById(`page-${pageId}`);
-                            if (pageRow) {
-                                pageRow.remove();
-                                showStatusMessage("Sayfa başarıyla silindi.", "success");
-                            } else {
-                                showStatusMessage("Silinen öğe sayfada bulunamadı.", "error");
-                            }
-                        } else {
-                            showStatusMessage(data.message || "Sayfa silinirken bir hata oluştu.", "error");
-                        }
-                    }, 0);
-                })
-                .catch(error => {
-                    showStatusMessage("Sayfa silinirken bir hata oluştu.", "error");
-                    console.error("Silme hatası:", error);
-                });
-        }
-
-        // Durum mesajlarını kullanıcıya göster
-        function showStatusMessage(message, type) {
-            const statusMessage = document.getElementById("statusMessage");
-            statusMessage.innerHTML = message;
-            statusMessage.className = type === "success" ? "alert alert-success" : "alert alert-danger";
-        }
-    </script>}

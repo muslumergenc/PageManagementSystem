@@ -7,15 +7,16 @@ namespace PageManagementSystem.Core.Entities
         public int Id { get; set; }
 
         [Required]
-        public int PageId { get; set; } // İlgili sayfa ID’si
-        public Page Page { get; set; }
+        public int PageDataId { get; set; } // PageData ile ilişki kurar
+        public PageData? PageData { get; set; } // Foreign Key: PageDataId üzerinden bağlanır
 
         [Required]
-        public string ContentType { get; set; } // İçerik türü: Text, Image, Video, vb.
+        public int PageId { get; set; } // Page ile ilişki kurar
+        public Page? Page { get; set; } // Foreign Key: PageId üzerinden bağlanır
 
         [Required]
-        public string ContentValue { get; set; } // İçeriğin kendisi (metin, resim yolu, video bağlantısı vb.)
-
-        public int Order { get; set; } // İçerik sırası
+        public string ContentType { get; set; }
+        public string ContentValue { get; set; }
+        public int Order { get; set; }
     }
 }

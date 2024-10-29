@@ -47,5 +47,10 @@ namespace PageManagementSystem.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<PageContent>> GetAllContentAsync()
+        {
+            return await _context.PageContents.ToListAsync();
+        }
     }
 }

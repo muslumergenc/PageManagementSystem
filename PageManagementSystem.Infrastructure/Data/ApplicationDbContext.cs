@@ -18,17 +18,26 @@ namespace PageManagementSystem.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Page>()
-                .HasMany(p => p.Contents)
-                .WithOne(pc => pc.Page)
-                .HasForeignKey(pc => pc.PageId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Page>()
-                .HasMany(p => p.PageData)
-                .WithOne(pd => pd.Page)
+            // Page - PageData (Bir Page birden fazla PageData'ya sahip olabilir)
+            modelBuilder.Entity<PageData>()
+                .HasOne(pd => pd.Page)
+                .WithMany(p => p.PageData)
                 .HasForeignKey(pd => pd.PageId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade); // Sayfa silindiğinde ilişkili PageData'ları sil
+
+            // PageData - PageContent (Bir PageData birden fazla PageContent'e sahip olabilir)
+            modelBuilder.Entity<PageContent>()
+                .HasOne(pc => pc.PageData)
+                .WithMany(pd => pd.Contents)
+                .HasForeignKey(pc => pc.PageDataId)
+                .OnDelete(DeleteBehavior.Cascade); // PageData silindiğinde ilişkili PageContent'leri sil
+
+            // Page - PageContent (Bir Page birden fazla PageContent'e sahip olabilir)
+            modelBuilder.Entity<PageContent>()
+                .HasOne(pc => pc.Page)
+                .WithMany()
+                .HasForeignKey(pc => pc.PageId)
+                .OnDelete(DeleteBehavior.Restrict); // Sayfa silinirse, PageContent ilişkisini kısıtla
         }
     }
 }

@@ -231,6 +231,9 @@ namespace PageManagementSystem.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
                     b.Property<string>("SeoDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -276,10 +279,13 @@ namespace PageManagementSystem.Infrastructure.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PageDataId")
+                    b.Property<int>("PageDataId")
                         .HasColumnType("int");
 
                     b.Property<int>("PageId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PageId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -287,6 +293,8 @@ namespace PageManagementSystem.Infrastructure.Migrations
                     b.HasIndex("PageDataId");
 
                     b.HasIndex("PageId");
+
+                    b.HasIndex("PageId1");
 
                     b.ToTable("PageContents");
                 });
@@ -366,17 +374,25 @@ namespace PageManagementSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("PageManagementSystem.Core.Entities.PageContent", b =>
                 {
-                    b.HasOne("PageManagementSystem.Core.Entities.PageData", null)
+                    b.HasOne("PageManagementSystem.Core.Entities.PageData", "PageData")
                         .WithMany("Contents")
-                        .HasForeignKey("PageDataId");
-
-                    b.HasOne("PageManagementSystem.Core.Entities.Page", "Page")
-                        .WithMany("Contents")
-                        .HasForeignKey("PageId")
+                        .HasForeignKey("PageDataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PageManagementSystem.Core.Entities.Page", "Page")
+                        .WithMany()
+                        .HasForeignKey("PageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PageManagementSystem.Core.Entities.Page", null)
+                        .WithMany("Contents")
+                        .HasForeignKey("PageId1");
+
                     b.Navigation("Page");
+
+                    b.Navigation("PageData");
                 });
 
             modelBuilder.Entity("PageManagementSystem.Core.Entities.PageData", b =>

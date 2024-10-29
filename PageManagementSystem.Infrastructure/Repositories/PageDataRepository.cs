@@ -14,12 +14,19 @@ namespace PageManagementSystem.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<PageData>> GetAllByPageIdAsync(int pageId)
+        public async Task<PageData?[]> GetAllAsync()
+        {
+            return await _context.PageData
+                .Include(pd => pd.Contents) // İçerik gruplarını içerikleriyle birlikte getir
+                .ToArrayAsync();
+        }
+
+        public async Task<PageData[]> GetAllByPageIdAsync(int pageId)
         {
             return await _context.PageData
                 .Include(pd => pd.Contents) // İçerik gruplarını içerikleriyle birlikte getir
                 .Where(pd => pd.PageId == pageId)
-                .ToListAsync();
+                .ToArrayAsync();
         }
 
         public async Task<PageData> GetByIdAsync(int id)

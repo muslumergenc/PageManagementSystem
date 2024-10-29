@@ -13,6 +13,11 @@ namespace PageManagementSystem.Application.Services
             _pageContentRepository = pageContentRepository;
         }
 
+        public async Task<IEnumerable<PageContent>> GetAllContentAsync()
+        {
+            return await _pageContentRepository.GetAllContentAsync();
+        }
+
         public async Task<IEnumerable<PageContent>> GetAllPageContentAsync(int pageDataId)
         {
             return await _pageContentRepository.GetAllByPageDataIdAsync(pageDataId);

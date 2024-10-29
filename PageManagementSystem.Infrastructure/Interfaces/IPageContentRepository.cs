@@ -9,5 +9,6 @@ namespace PageManagementSystem.Infrastructure.Interfaces
         Task AddAsync(PageContent pageContent); // Yeni bir içerik ekler
         Task UpdateAsync(PageContent pageContent); // Mevcut bir içeriği günceller
         Task DeleteAsync(int id); // İçeriği siler
+        Task<IEnumerable<PageContent>> GetAllContentAsync();
     }
 }

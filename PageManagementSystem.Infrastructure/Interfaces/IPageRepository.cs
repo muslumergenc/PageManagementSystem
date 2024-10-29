@@ -4,7 +4,7 @@ namespace PageManagementSystem.Infrastructure.Interfaces
 {
     public interface IPageRepository
     {
-        Task<IEnumerable<Page>> GetAllAsync();
+        Task<Page[]> GetAllAsync();
         Task<Page> GetByIdAsync(int id);
         Task AddAsync(Page page);
         Task UpdateAsync(Page page);

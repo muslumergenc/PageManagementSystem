@@ -7,19 +7,19 @@ using PageManagementSystem.Infrastructure.Interfaces;
 using PageManagementSystem.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 var connStr = builder.Configuration.GetConnectionString("DefaultConnection");
 
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connStr));
-
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
 builder.Services.AddTransient<IEmailSenderService, EmailSender>();
 builder.Services.AddScoped<IPageService, PageService>();
+builder.Services.AddScoped<IPageDataService, PageDataService>();
+builder.Services.AddScoped<IPageContentService,PageContentService>();
 
 builder.Services.AddScoped<IPageRepository, PageRepository>();
 builder.Services.AddScoped<IPageDataRepository, PageDataRepository>();
@@ -31,7 +31,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 var app = builder.Build();
 
-// Admin rolünü oluþturma iþlemi (ilk baþlatmada)
+
 //using (var scope = app.Services.CreateScope())
 //{
 //    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();

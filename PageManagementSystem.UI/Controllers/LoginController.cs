@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PageManagementSystem.Application.Interfaces;
-using PageManagementSystem.UI.Models.VMs;
+using PageManagementSystem.UI.Models.VMs.AccountVMs;
 
 namespace PageManagementSystem.UI.Controllers
 {
@@ -32,7 +32,7 @@ namespace PageManagementSystem.UI.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
 
                 ModelState.AddModelError(string.Empty, "Kulllanıcı Adı veya Şifre Hatalı !");

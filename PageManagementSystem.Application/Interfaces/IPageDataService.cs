@@ -4,7 +4,8 @@ namespace PageManagementSystem.Application.Interfaces
 {
     public interface IPageDataService
     {
-        Task<IEnumerable<PageData>> GetAllPageDataAsync(int pageId); // Belirli bir sayfanın tüm içerik gruplarını getirir
+        Task<PageData[]> GetAllPageDataAsync();
+        Task<PageData[]> GetAllPageDataAsync(int pageId); // Belirli bir sayfanın tüm içerik gruplarını getirir
         Task<PageData> GetPageDataByIdAsync(int id); // İçerik grubunu ID'ye göre getirir
         Task AddPageDataAsync(PageData pageData); // Yeni bir içerik grubu ekler
         Task UpdatePageDataAsync(PageData pageData); // Mevcut bir içerik grubunu günceller

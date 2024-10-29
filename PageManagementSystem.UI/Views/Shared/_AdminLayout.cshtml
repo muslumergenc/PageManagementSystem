@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="~/Login/logincss/bootstrap-4.min.css">
     <link rel="stylesheet" href="~/Login/logincss/toastr.min.css">
     <link rel="stylesheet" href="~/Login/logincss/summernote/summernote-bs4.css">
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -29,7 +31,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <div class="sidebar">
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                         <li class="nav-item">
                             <a href="/admin" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
@@ -37,25 +39,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">
+                            <a href="/admin/PageIndex" class="nav-link">
                                 <i class="nav-icon fas fa-map-signs"></i>
-                                <p>AnaSayfa<i class="right fas fa-angle-left"></i></p>
+                                <p>Pages</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/slider" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Slider</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/admin/haber" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Haberler</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
+
                         <li class="nav-item">
                             <a href="/admin/kullanicilar" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
@@ -76,9 +65,9 @@
                                 {
                                     @Html.AntiForgeryToken()
 
-                                    <button type="submit" class="btn btn-outline-danger text-danger nav-link" style="width:100%;display:flex;align-items:center;">
+                                    <button type="submit" class="btn btn-outline-danger text-white nav-link" style="width:100%;display:flex;align-items:center;">
                                         <i class="nav-icon fas fa-sign-out-alt"></i>
-                                        <p class="text">Oturumu Kapat</p>
+                                        <p>Oturumu Kapat</p>
                                     </button>
                                 }
                             }
@@ -106,6 +95,25 @@
     <script src="~/Login/logincss/demo.js"></script>
     <script src="~/Login/logincss/summernote/summernote-bs4.min.js"></script>
     <script src="~/Login/logincss/ekko-lightbox/ekko-lightbox.min.js"></script>
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true,
+                });
+            });
+            $('.filter-container').filterizr({ gutterPixels: 3 });
+            $('.btn[data-filter]').on('click', function () {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+            });
+        })
+    </script>
+    <script>
+        $(function () {
+            $('.textarea').summernote()
+        })</script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
