@@ -1,0 +1,34 @@
+﻿@model PageContent
+@{
+    ViewData["Title"] = "CreatePageContent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <h2>Yeni İçerik</h2>
+                <form asp-action="CreatePageContent" method="post">
+                    <input type="hidden" asp-for="PageId" />
+                    <div class="form-group">
+                        <label asp-for="ContentType"></label>
+                        <input asp-for="ContentType" class="form-control" />
+                        <span asp-validation-for="ContentType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContentValue"></label>
+                        <textarea asp-for="ContentValue" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="ContentValue" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <a asp-action="PageContentIndex" asp-route-pageDataId="@Model.PageId" class="btn btn-secondary">İptal</a>
+                </form>
+                <script>
+                    CKEDITOR.replace('ContentValue');
+                </script>
+            </div>
+        </div>
+    </section>
+</div>
+

@@ -1,0 +1,52 @@
+﻿@model PageData[]
+@{
+    ViewData["Title"] = "PageDataIndex";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <a asp-action="CreatePageData" asp-route-pageId="@ViewBag.PageId" class="btn btn-primary mb-3">Yeni İçerik Grubu Ekle</a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Grup ID</th>
+                            <th>Sayfa</th>
+                            <th>Veri Türü</th>
+                            <th>İçerik Sayısı</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model is not null)
+                        {
+                            @foreach (var pageData in Model)
+                            {
+                                <tr>
+                                    <td>@pageData.Id</td>
+                                    <td>@pageData.Page.Title</td>
+                                    <td>@pageData</td>
+                                    <td>@pageData.Content.Length</td>
+                                    <td>
+                                        <a asp-action="EditPageData" asp-route-id="@pageData.Id" class="btn btn-secondary">Düzenle</a>
+                                        <a asp-action="DeletePageData" asp-route-id="@pageData.Id" class="btn btn-danger">Sil</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>Veri Bulunamadı...</td>
+                                
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

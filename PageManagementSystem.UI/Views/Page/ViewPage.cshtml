@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "ViewPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model PageViewModel
+
+<div class="page-content">
+    <h1>@Model.Page.Title</h1>
+    @foreach (var pageData in Model.PageDataList)
+    {
+        <section class="content-group">
+            <h2>@pageData.Content</h2> 
+            @foreach (var content in pageData.Content)
+            {
+                <div class="content-item">
+                    @if (content == "Text")
+                    {
+                        <p>@Html.Raw(content)</p>
+                    }
+                    else if (content.ContentType == "Image")
+                    {
+                        <img src="@content.ContentValue" alt="Image" />
+                    }
+                    else if (content.ContentType == "Video")
+                    {
+                        <video controls>
+                            <source src="@content.ContentValue" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    }
+                </div>
+            }
+        </section>
+    }
+</div>
+

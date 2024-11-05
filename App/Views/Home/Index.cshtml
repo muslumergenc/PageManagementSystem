@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using PageManagementSystem.Core.Entities
+@model Page[]
+
+
+<h2>Page Listesi</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Sayfa Ekle</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Başlık</th>
+            <th>Slug</th>
+            <th>Yayınlanma Durumu</th>
+            <th>Oluşturulma Tarihi</th>
+            <th>Güncellenme Tarihi</th>
+            <th>Aksiyonlar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pages in Model)
+        {
+            <tr>
+                <td>@pages.Id</td>
+                <td>@pages.PageDataList.FirstOrDefault()?.Title ?? "Başlık Yok"</td> <!-- İlk dil için başlığı gösterir -->
+                <td>@pages.Slug</td>
+                <td>@(pages.IsPublished ? "Yayınlandı" : "Taslak")</td>
+                <td>@pages.CreatedAt.ToString("yyyy-MM-dd")</td>
+                <td>@pages.UpdatedAt.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@pages.Id" class="btn btn-info btn-sm">Detay</a>
+                    <a asp-action="Edit" asp-route-id="@pages.Id" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@pages.Id" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

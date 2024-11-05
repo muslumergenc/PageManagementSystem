@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "DeletePageContent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model PageContent
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+               
+
+                <h2>İçerik Sil</h2>
+
+                <div class="alert alert-danger">
+                    <h4>Bu içeriği silmek istediğinize emin misiniz?</h4>
+                    <p><strong>@Model.ContentType</strong> türündeki içeriği silmek üzeresiniz.</p>
+                </div>
+
+                <form asp-action="DeletePageContentConfirmed" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Sil</button>
+                    <a asp-action="PageContentIndex" asp-route-pageDataId="@Model.PageId" class="btn btn-secondary">İptal</a>
+                </form>
+
+            </div>
+        </div>
+    </section>
+</div>
+

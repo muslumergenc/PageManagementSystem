@@ -1,0 +1,28 @@
+﻿@model PageData
+@{
+    ViewData["Title"] = "EditPageData";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <h2>İçerik Grubu Düzenle</h2>
+
+                <form asp-action="EditPageData" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="PageId" />
+
+                    <div class="form-group">
+                        <label asp-for="Content"></label>
+                        <input asp-for="Content" class="form-control" />
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                    <a asp-action="PageDataIndex" asp-route-pageId="@Model.PageId" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
